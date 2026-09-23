@@ -1,0 +1,23 @@
+{
+	"name": "custom-cli",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"bin": {
+		"create-component": "./cli.js",
+		"cp": "./cli,js"
+	},
+	"dependencies": {
+		"@clack/prompts": "^1.8.1",
+		"ora": "^9.4.1",
+		"picocolors": "^1.1.1",
+		"prompts": "^2.4.2"
+	}
+}
