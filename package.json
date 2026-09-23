@@ -12,7 +12,7 @@
 	"type": "module",
 	"bin": {
 		"create-component": "./cli.js",
-		"cp": "./cli,js"
+		"c-p": "./cli.js"
 	},
 	"dependencies": {
 		"@clack/prompts": "^1.8.1",
