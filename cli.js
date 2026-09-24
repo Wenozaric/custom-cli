@@ -14,15 +14,29 @@ async function main() {
 	if (!componentName) {
 		const nameResponse = await p.text({
 			message: 'Name of your new component',
-			placeholder: 'Button'
+			placeholder: 'Button',
+			validate(value) {
+				const trimmed = value.trim()
+
+				if (trimmed.length < 2) {
+					return 'Имя слишком короткое (минимум 2 символа)!'
+				}
+
+				const isValidName = /^[a-zA-Z0-9_-]+$/.test(trimmed)
+				if (!isValidName) {
+					return 'Имя может содержать только буквы, цифры, дефисы и знаки подчеркивания!'
+				}
+			},
 		})
 
 		if (p.isCancel(nameResponse)) {
-			p.cancel('Canceled')
+			p.cancel('Операция отменена')
 			process.exit(0)
 		}
 		componentName = nameResponse
 	}
+
+	//componentName = componentName.trim().charAt(0).toUpperCase() + componentName.trim().slice(1)
 
 	const answers = await p.group({
 		elementType: () =>
@@ -85,8 +99,8 @@ async function main() {
         }
 
 		const componentTemplate =
-			(elementType == '.jsx') | '.tsx'
-				? `export const ${componentName} = () => {
+			(elementType == '.jsx') | (elementType == '.tsx')
+				? `export const ${componentName.trim().charAt(0).toUpperCase() + componentName.trim().slice(1)} = () => {
     return (
         <div className={${styleType === 'module' ? 'styles.container' : "'container'"}}>
             <h1>${componentName}</h1>
