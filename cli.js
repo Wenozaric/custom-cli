@@ -19,24 +19,23 @@ async function main() {
 				const trimmed = value.trim()
 
 				if (trimmed.length < 2) {
-					return 'Имя слишком короткое (минимум 2 символа)!'
+					return 'Name too short (2 len min)'
 				}
 
 				const isValidName = /^[a-zA-Z0-9_-]+$/.test(trimmed)
 				if (!isValidName) {
-					return 'Имя может содержать только буквы, цифры, дефисы и знаки подчеркивания!'
+					return 'Don`t use special characters'
+
 				}
 			},
 		})
 
 		if (p.isCancel(nameResponse)) {
-			p.cancel('Операция отменена')
+			p.cancel('Canceled')
 			process.exit(0)
 		}
 		componentName = nameResponse
 	}
-
-	//componentName = componentName.trim().charAt(0).toUpperCase() + componentName.trim().slice(1)
 
 	const answers = await p.group({
 		elementType: () =>
